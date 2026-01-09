@@ -1,6 +1,6 @@
 # <p align="center"><img src="static/linkhub.png" alt="LinkHub Logo"></p>
 
-
+<br><br>
 <p align="center">
   <strong>O Teu Repositório de Elite para Games, Apps e Tools</strong>
 </p>
@@ -82,6 +82,7 @@ Tens uma ideia para melhorar o LinkHub?
 3. Faz **Commit** das tuas alterações (`git commit -m 'Adiciona nova feature'`).
 4. Faz um **Push** para a Branch (`git push origin feature/NovaFeature`).
 5. Abre um **Pull Request**.
+
 
 
 
