@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row justify-content-center align-items-center animate-fade-in" style="min-height: 85vh;">
+    <div class="col-md-6 col-lg-5 col-xl-4">
+        <div class="glass-card p-4 p-md-5 shadow-lg border-bottom-accent">
+            <div class="text-center mb-4">
+                <div class="d-inline-flex align-items-center justify-content-center bg-accent bg-opacity-10 rounded-circle mb-3" style="width: 64px; height: 64px;">
+                    <i class="bi bi-person-plus-fill text-accent fs-2"></i>
+                </div>
+                <h2 class="fw-extrabold text-white mb-1">Criar Conta</h2>
+                <p class="text-secondary small">Junta-te à elite de devs e gamers do LinkHub.</p>
+            </div>
+
+            <form method="POST" autocomplete="off">
+                <div class="mb-3">
+                    <label class="small-caps text-secondary mb-2 d-block">Nome de Utilizador</label>
+                    <div class="input-group custom-input-group">
+                        <span class="input-group-text bg-dark border-secondary text-secondary"><i class="bi bi-person"></i></span>
+                        <input type="text" name="username" class="form-control bg-dark text-white border-secondary shadow-none" 
+                               placeholder="ex: GhostCoder" required minlength="3">
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="small-caps text-secondary mb-2 d-block">Endereço de E-mail</label>
+                    <div class="input-group custom-input-group">
+                        <span class="input-group-text bg-dark border-secondary text-secondary"><i class="bi bi-envelope-at"></i></span>
+                        <input type="email" name="email" class="form-control bg-dark text-white border-secondary shadow-none" 
+                               placeholder="nome@exemplo.com" required>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <label class="small-caps text-secondary mb-2 d-block">Palavra-passe</label>
+                    <div class="input-group custom-input-group">
+                        <span class="input-group-text bg-dark border-secondary text-secondary"><i class="bi bi-shield-lock"></i></span>
+                        <input type="password" name="password" class="form-control bg-dark text-white border-secondary shadow-none" 
+                               placeholder="••••••••" required minlength="8">
+                    </div>
+                    <div class="d-flex align-items-center mt-2 text-muted">
+                        <i class="bi bi-info-circle me-1" style="font-size: 0.7rem;"></i>
+                        <span style="font-size: 0.65rem;">Mínimo de 8 caracteres (segurança recomendada).</span>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100 py-3 fw-extrabold shadow-glow mb-3 d-flex align-items-center justify-content-center gap-2">
+                    CRIAR MINHA CONTA <i class="bi bi-rocket-takeoff-fill"></i>
+                </button>
+            </form>
+
+            <div class="text-center mt-4 pt-3 border-top border-secondary border-opacity-25">
+                <p class="small text-secondary m-0">Já fazes parte da equipa?</p>
+                <a href="/login" class="text-accent fw-extrabold text-decoration-none small">EFETUAR LOGIN AGORA</a>
+            </div>
+        </div>
+
+        <div class="text-center mt-4 opacity-75">
+            <p class="text-muted" style="font-size: 0.65rem; line-height: 1.5;">
+                Ao registares-te, concordas com os nossos <br>
+                <a href="#" class="text-secondary text-decoration-underline">Termos de Uso</a> & 
+                <a href="#" class="text-secondary text-decoration-underline">Privacidade</a>.
+            </p>
+        </div>
+    </div>
+</div>
+
+<style>
+    .border-bottom-accent { border-bottom: 4px solid var(--accent) !important; }
+    
+    .custom-input-group:focus-within .input-group-text {
+        border-color: var(--accent) !important;
+        color: var(--accent) !important;
+        background-color: rgba(0, 112, 243, 0.05) !important;
+    }
+
+    .custom-input-group:focus-within .form-control {
+        border-color: var(--accent) !important;
+        background-color: #111 !important;
+    }
+
+    .form-control {
+        border-left: none !important;
+        border-radius: 0 10px 10px 0 !important;
+        padding: 12px;
+        transition: all 0.2s ease;
+    }
+
+    .input-group-text {
+        border-right: none !important;
+        border-radius: 10px 0 0 10px !important;
+        transition: all 0.2s ease;
+        min-width: 45px;
+        justify-content: center;
+    }
+
+    .shadow-glow {
+        box-shadow: 0 4px 20px rgba(0, 112, 243, 0.25);
+        transition: all 0.3s ease;
+    }
+
+    .shadow-glow:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 25px rgba(0, 112, 243, 0.45);
+        background: #fff;
+    }
+
+    .animate-fade-in {
+        animation: regReveal 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    @keyframes regReveal {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+</style>
+{% endblock %}

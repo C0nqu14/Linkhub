@@ -1,0 +1,175 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container py-4">
+    <div class="row mb-5 align-items-center animate-fade-in">
+        <div class="col-md-7">
+            <h1 class="display-4 fw-extrabold text-white mb-2">Descobre o <span class="text-accent">Futuro</span></h1>
+            <p class="text-secondary fs-5 lh-base">O repositório definitivo para projetos, ferramentas e software verificado pela comunidade LinkHub.</p>
+        </div>
+        <div class="col-md-5 text-md-end mt-4 mt-md-0">
+            <div class="filter-group p-1 bg-dark rounded-pill border border-secondary d-inline-flex shadow-sm">
+                <button class="btn btn-filter active" onclick="filterCategory('all')">Todos</button>
+                <button class="btn btn-filter" onclick="filterCategory('Games')">Jogos</button>
+                <button class="btn btn-filter" onclick="filterCategory('Apps')">Apps</button>
+                <button class="btn btn-filter" onclick="filterCategory('Tools')">Tools</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-4" id="app-grid">
+        {% for app in apps %}
+        <div class="col-sm-6 col-lg-4 col-xl-3 app-item" data-category="{{ app.category }}">
+            <div class="app-card-premium">
+                <div class="card-image-wrapper">
+                    <img src="{{ app.image_url }}" class="card-img-top" alt="{{ app.title }}" loading="lazy">
+                    <div class="category-badge">{{ app.category }}</div>
+                    
+                    <div class="vote-overlay shadow-lg">
+                        <div class="d-flex flex-column align-items-center gap-1">
+                            <a href="/vote/{{ app.id }}/1" class="vote-link up" title="Votar Positivo"><i class="bi bi-caret-up-fill"></i></a>
+                            <span class="fw-bold fs-5">{{ app.votes }}</span>
+                            <a href="/vote/{{ app.id }}/-1" class="vote-link down" title="Votar Negativo"><i class="bi bi-caret-down-fill"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card-body-custom">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <h5 class="card-title-custom m-0 text-truncate pe-2">{{ app.title }}</h5>
+                        <span class="badge bg-dark border border-secondary text-info fw-bold" style="font-size: 0.6rem;">v{{ app.version }}</span>
+                    </div>
+                    
+                    <p class="card-text-custom text-secondary small mb-3">
+                        {{ app.description[:85] }}{% if app.description|length > 85 %}...{% endif %}
+                    </p>
+                    
+                    <div class="d-flex justify-content-between align-items-center mt-auto pt-3 border-top border-secondary border-opacity-25">
+                        <div class="user-info d-flex align-items-center">
+                            <img src="{{ app.author.get_avatar() }}" class="rounded-circle me-2 border border-secondary" width="24" height="24">
+                            <span class="text-muted fw-bold" style="font-size: 0.75rem;">u/{{ app.author.username }}</span>
+                        </div>
+                        <a href="/app/{{ app.id }}" class="btn btn-accent-outline btn-sm rounded-pill px-3">VER MAIS</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <div class="col-12 text-center py-5">
+            <div class="glass-card py-5 border-dashed">
+                <i class="bi bi-search display-1 text-secondary opacity-25"></i>
+                <h4 class="text-secondary mt-3">Nenhum tesouro encontrado ainda...</h4>
+                <p class="text-muted small">Sê o primeiro a publicar algo incrível!</p>
+                <a href="/post/new" class="btn btn-primary mt-3 px-4">Submeter Projeto</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<style>
+    .btn-filter {
+        color: #888;
+        border: none;
+        background: transparent;
+        padding: 6px 18px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        transition: 0.3s;
+    }
+    .btn-filter.active, .btn-filter:hover {
+        background: var(--accent);
+        color: #000 !important;
+    }
+
+    .app-card-premium {
+        background: #0d0d0d;
+        border: 1px solid #222;
+        border-radius: 18px;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        overflow: hidden;
+    }
+
+    .app-card-premium:hover {
+        transform: translateY(-8px);
+        border-color: var(--accent);
+        box-shadow: 0 15px 35px rgba(0, 112, 243, 0.2);
+    }
+
+    .card-image-wrapper { position: relative; height: 170px; overflow: hidden; }
+    .card-image-wrapper img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+    .app-card-premium:hover .card-image-wrapper img { transform: scale(1.08); }
+
+    .vote-overlay {
+        position: absolute;
+        right: 12px;
+        top: 12px;
+        background: rgba(0, 112, 243, 0.95);
+        color: #fff;
+        padding: 10px 8px;
+        border-radius: 12px;
+        opacity: 0;
+        transform: translateX(10px);
+        transition: all 0.3s ease;
+        backdrop-filter: blur(4px);
+    }
+    .app-card-premium:hover .vote-overlay { opacity: 1; transform: translateX(0); }
+
+    .vote-link { color: #fff; font-size: 1.3rem; transition: 0.2s; display: block; line-height: 0.8; }
+    .vote-link:hover { transform: scale(1.3); color: #fff; }
+
+    .category-badge {
+        position: absolute;
+        top: 12px;
+        left: 12px;
+        background: rgba(0, 0, 0, 0.8);
+        border: 1px solid rgba(255,255,255,0.1);
+        color: #fff;
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 0.65rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .card-body-custom { padding: 1.25rem; display: flex; flex-direction: column; flex-grow: 1; }
+    .card-title-custom { font-size: 1.05rem; font-weight: 700; color: #fff; letter-spacing: -0.3px; }
+
+    .btn-accent-outline {
+        border: 1px solid var(--accent);
+        color: var(--accent);
+        font-weight: 700;
+        font-size: 0.75rem;
+        transition: 0.2s;
+    }
+    .btn-accent-outline:hover { background: var(--accent); color: #000; }
+
+    .animate-fade-in { animation: fadeIn 0.6s ease-out; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    
+    .border-dashed { border-style: dashed !important; border-width: 2px !important; }
+</style>
+
+<script>
+    function filterCategory(category) {
+        
+        const buttons = document.querySelectorAll('.btn-filter');
+        buttons.forEach(btn => btn.classList.remove('active'));
+        event.target.classList.add('active');
+
+        const items = document.querySelectorAll('.app-item');
+        items.forEach(item => {
+            if (category === 'all' || item.getAttribute('data-category') === category) {
+                item.style.display = 'block';
+                item.classList.add('animate-fade-in');
+            } else {
+                item.style.display = 'none';
+            }
+        });
+    }
+</script>
+{% endblock %}

@@ -1,0 +1,150 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row justify-content-center py-5">
+    <div class="col-md-8 col-lg-6">
+        <div class="text-center mb-4 animate-fade-in">
+            <span class="badge rounded-pill bg-warning bg-opacity-10 text-warning px-3 py-2 small fw-bold border border-warning border-opacity-25">
+                <i class="bi {{ 'bi-pencil-fill' if post else 'bi-shield-lock-fill' }} me-1"></i> 
+                {{ 'MODO DE EDIÇÃO (ADMIN/AUTOR)' if post else 'SUBMISSÃO SUJEITA A MODERAÇÃO' }}
+            </span>
+        </div>
+
+        <div class="glass-card p-4 shadow-lg border-top-accent">
+            <div class="d-flex align-items-center mb-4">
+                <div class="bg-accent bg-opacity-10 p-3 rounded-3 me-3">
+                    <i class="bi {{ 'bi-pencil-square' if post else 'bi-box-seam-fill' }} text-accent fs-3"></i>
+                </div>
+                <div>
+                    <h3 class="fw-extrabold text-white mb-0">{{ 'Editar Repositório' if post else 'Novo Repositório' }}</h3>
+                    <p class="text-secondary small mb-0">{{ post.title if post else 'Partilha o teu projeto com a comunidade.' }}</p>
+                </div>
+            </div>
+            
+            <form method="POST" id="postForm">
+                <div class="row g-3">
+                    <div class="col-12">
+                        <label class="small-caps text-secondary mb-2 d-block">Título do Projeto</label>
+                        <input type="text" name="title" class="form-control form-control-lg bg-dark text-white border-secondary shadow-none" 
+                               placeholder="Ex: Cyberpunk 2077 Mod Menu" required maxlength="100"
+                               value="{{ post.title if post else '' }}">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="small-caps text-secondary mb-2 d-block">Versão</label>
+                        <input type="text" name="version" class="form-control bg-dark text-white border-secondary shadow-none" 
+                               placeholder="v1.2.4" value="{{ post.version if post else '' }}">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="small-caps text-secondary mb-2 d-block">Categoria</label>
+                        <select name="category" class="form-select bg-dark text-white border-secondary shadow-none">
+                            <option value="Games" {{ 'selected' if post and post.category == 'Games' }}>🎮 Jogo / Mod</option>
+                            <option value="Apps" {{ 'selected' if post and post.category == 'Apps' }}>📱 Aplicação</option>
+                            <option value="Tools" {{ 'selected' if post and post.category == 'Tools' }}>🛠️ Ferramenta</option>
+                            <option value="Other" {{ 'selected' if post and post.category == 'Other' }}>📦 Outros</option>
+                        </select>
+                    </div>
+
+                    <div class="col-12">
+                        <label class="small-caps text-secondary mb-2 d-block">URL da Imagem de Capa</label>
+                        <div class="input-group mb-2">
+                            <span class="input-group-text bg-dark border-secondary text-secondary"><i class="bi bi-image"></i></span>
+                            <input type="url" name="image_url" id="image_url" class="form-control bg-dark text-white border-secondary shadow-none" 
+                                   placeholder="https://imgur.com/foto.jpg" oninput="previewImage()"
+                                   value="{{ post.image_url if post else '' }}">
+                        </div>
+                        <div id="imagePreviewContainer" class="{{ 'd-block' if post and post.image_url else 'd-none' }} mt-2">
+                            <p class="text-muted" style="font-size: 0.6rem; text-transform: uppercase;">Pré-visualização:</p>
+                            <img id="imagePreview" src="{{ post.image_url if post else '' }}" class="rounded border border-secondary w-100" style="height: 150px; object-fit: cover;">
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <label class="small-caps text-accent mb-2 d-block">Link Direto (Download)</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-dark border-secondary text-accent"><i class="bi bi-cloud-download-fill"></i></span>
+                            <input type="url" name="download_url" class="form-control bg-dark text-white border-secondary shadow-none" 
+                                   placeholder="Mega, Mediafire, Drive..." required
+                                   value="{{ post.download_url if post else '' }}">
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <label class="small-caps text-secondary mb-2 d-block">Descrição Detalhada</label>
+                        <textarea name="description" rows="5" class="form-control bg-dark text-white border-secondary shadow-none" 
+                                  placeholder="Explica o que este projeto faz..." required>{{ post.description if post else '' }}</textarea>
+                    </div>
+                </div>
+
+                <div class="mt-4 pt-3 border-top border-secondary">
+                    <button type="submit" class="btn btn-primary btn-lg w-100 fw-extrabold shadow-sm py-3">
+                        {{ 'GUARDAR ALTERAÇÕES' if post else 'ENVIAR PARA ANÁLISE' }}
+                    </button>
+                    
+                    {% if post %}
+                    <a href="{{ url_for('admin.admin_panel' if current_user.role == 'admin' else 'dashboard.dashboard') }}" 
+                       class="btn btn-outline-secondary w-100 mt-2 py-2 fw-bold">
+                        CANCELAR
+                    </a>
+                    {% endif %}
+
+                    <div class="d-flex align-items-center justify-content-center mt-3 text-secondary">
+                        <i class="bi bi-info-circle me-2"></i>
+                        <span style="font-size: 0.75rem;">
+                            {{ 'As alterações serão aplicadas imediatamente.' if post else 'O teu post ficará visível após aprovação.' }}
+                        </span>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<style>
+    .border-top-accent { border-top: 4px solid var(--accent) !important; }
+    
+    .form-control, .form-select {
+        border-radius: 10px;
+        padding: 12px;
+        font-size: 0.95rem;
+        transition: all 0.2s ease-in-out;
+    }
+
+    .form-control:focus, .form-select:focus {
+        background-color: #0c0c0c !important;
+        border-color: var(--accent) !important;
+        box-shadow: 0 0 0 0.25rem rgba(0, 112, 243, 0.1) !important;
+    }
+
+    .small-caps {
+        font-size: 0.7rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+    }
+
+    .animate-fade-in {
+        animation: fadeIn 0.5s ease-out;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+</style>
+
+<script>
+    function previewImage() {
+        const urlInput = document.getElementById('image_url');
+        const preview = document.getElementById('imagePreview');
+        const container = document.getElementById('imagePreviewContainer');
+        
+        if (urlInput.value) {
+            preview.src = urlInput.value;
+            container.classList.remove('d-none');
+        } else {
+            container.classList.add('d-none');
+        }
+    }
+</script>
+{% endblock %}

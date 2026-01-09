@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row justify-content-center align-items-center" style="min-height: 80vh;">
+    <div class="col-md-5 col-lg-4">
+        <div class="glass-card p-5 shadow-lg" style="border-top: 4px solid var(--accent);">
+            <div class="text-center mb-4">
+                <div class="d-inline-flex align-items-center justify-content-center bg-primary bg-opacity-10 rounded-circle mb-3" style="width: 60px; height: 60px;">
+                    <i class="bi bi-shield-lock text-accent fs-2"></i>
+                </div>
+                <h3 class="fw-bold text-white mb-1">Bem-vindo de volta</h3>
+                <p class="text-secondary small">Introduz as tuas credenciais para aceder ao LinkHub.</p>
+            </div>
+
+            <form method="POST">
+                <div class="mb-3">
+                    <label class="form-label small fw-bold text-uppercase text-secondary" style="font-size: 0.7rem; letter-spacing: 1px;">Endereço de E-mail</label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-dark border-secondary text-secondary"><i class="bi bi-envelope"></i></span>
+                        <input type="email" name="email" class="form-control bg-dark text-white border-secondary" placeholder="exemplo@email.com" required>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <div class="d-flex justify-content-between">
+                        <label class="form-label small fw-bold text-uppercase text-secondary" style="font-size: 0.7rem; letter-spacing: 1px;">Palavra-passe</label>
+                        <a href="#" class="small text-accent text-decoration-none" style="font-size: 0.7rem;">Esqueceste-te?</a>
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-text bg-dark border-secondary text-secondary"><i class="bi bi-key"></i></span>
+                        <input type="password" name="password" class="form-control bg-dark text-white border-secondary" placeholder="••••••••" required>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100 py-2 fw-bold shadow-glow mb-3">
+                    EFETUAR LOGIN <i class="bi bi-arrow-right-short ms-1"></i>
+                </button>
+            </form>
+
+            <div class="text-center">
+                <p class="small text-secondary m-0">Novo no repositório? <a href="/register" class="text-accent fw-bold text-decoration-none">Cria uma conta agora</a></p>
+            </div>
+        </div>
+
+        <div class="text-center mt-4">
+            <p class="text-muted small" style="font-size: 0.7rem;">&copy; 2026 LinkHub Community Engine. <br> Encriptação ponta-a-ponta ativa.</p>
+        </div>
+    </div>
+</div>
+
+<style>
+    .shadow-glow {
+        box-shadow: 0 0 15px rgba(0, 242, 255, 0.3);
+    }
+    .input-group-text {
+        border-right: none;
+    }
+    .form-control {
+        border-left: none !important;
+    }
+    .form-control:focus + .input-group-text {
+        border-color: var(--accent) !important;
+    }
+    .text-accent { color: var(--accent); }
+</style>
+{% endblock %}
