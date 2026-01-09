@@ -3,9 +3,12 @@
   <strong>O Teu Repositório de Elite para Games, Apps e Tools</strong>
 </p>
 
-<img src="https://img.shields.io/badge/LINKHUB-0070F3?style=for-the-badge&logo=package&logoColor=white" alt="LinkHub Logo Badge">
+
 ![LinkHub Banner](https://img.shields.io/badge/Status-Em_Desenvolvimento-0070f3?style=for-the-badge&logo=flask)
 ![Python Version](https://img.shields.io/badge/Python-3.11+-white?style=for-the-badge&logo=python)
+
+<img src="https://img.shields.io/badge/LINKHUB-0070F3?style=for-the-badge&logo=package&logoColor=white" alt="LinkHub Logo Badge">
+
 
 O **LinkHub** é uma plataforma centralizada para a descoberta e partilha de recursos digitais de elite. De jogos indie a ferramentas de produtividade e apps de design, o LinkHub organiza a web para ti.
 
@@ -75,6 +78,7 @@ Tens uma ideia para melhorar o LinkHub?
 3. Faz **Commit** das tuas alterações (`git commit -m 'Adiciona nova feature'`).
 4. Faz um **Push** para a Branch (`git push origin feature/NovaFeature`).
 5. Abre um **Pull Request**.
+
 
 
 
