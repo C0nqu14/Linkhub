@@ -5,7 +5,7 @@
   <strong>O Teu Repositório de Elite para Games, Apps e Tools</strong>
 </p>
 
-
+<br><br>
 
 
 ![LinkHub Banner](https://img.shields.io/badge/Status-Em_Desenvolvimento-0070f3?style=for-the-badge&logo=flask)
@@ -82,6 +82,7 @@ Tens uma ideia para melhorar o LinkHub?
 3. Faz **Commit** das tuas alterações (`git commit -m 'Adiciona nova feature'`).
 4. Faz um **Push** para a Branch (`git push origin feature/NovaFeature`).
 5. Abre um **Pull Request**.
+
 
 
 
