@@ -1,4 +1,12 @@
-# 🚀 LinkHub
+# <p align="center"><img src="https://raw.githubusercontent.com/twbs/icons/main/icons/box-seam-fill.svg" width="40" height="40" style="fill: #0070f3;"> LinkHub</p>
+
+<p align="center">
+  <strong>O Teu Repositório de Elite para Games, Apps e Tools</strong>
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/LINKHUB-0070F3?style=for-the-badge&logo=package&logoColor=white" alt="LinkHub Logo Badge">
+</p>
 
 ![LinkHub Banner](https://img.shields.io/badge/Status-Em_Desenvolvimento-0070f3?style=for-the-badge&logo=flask)
 ![Python Version](https://img.shields.io/badge/Python-3.11+-white?style=for-the-badge&logo=python)
@@ -71,4 +79,5 @@ Tens uma ideia para melhorar o LinkHub?
 3. Faz **Commit** das tuas alterações (`git commit -m 'Adiciona nova feature'`).
 4. Faz um **Push** para a Branch (`git push origin feature/NovaFeature`).
 5. Abre um **Pull Request**.
+
 
