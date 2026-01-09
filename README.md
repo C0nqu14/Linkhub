@@ -72,7 +72,3 @@ Tens uma ideia para melhorar o LinkHub?
 4. Faz um **Push** para a Branch (`git push origin feature/NovaFeature`).
 5. Abre um **Pull Request**.
 
----
-
-⭐ Desenvolvido com fé de que este repositório vai bombar!
-
