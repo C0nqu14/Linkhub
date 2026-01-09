@@ -1,4 +1,4 @@
-# 🚀 LinkHub | Repositório Comunitário
+# 🚀 LinkHub
 
 ![LinkHub Banner](https://img.shields.io/badge/Status-Em_Desenvolvimento-0070f3?style=for-the-badge&logo=flask)
 ![Python Version](https://img.shields.io/badge/Python-3.11+-white?style=for-the-badge&logo=python)
@@ -26,10 +26,9 @@ O **LinkHub** é uma plataforma centralizada para a descoberta e partilha de rec
 
 1. **Clona o repositório:**
    ```bash
-   git clone [https://github.com/teu-usuario/linkhub.git](https://github.com/teu-usuario/linkhub.git)
+   git clone https://github.com/C0nqu14/linkhub.git
    cd linkhub
-
-```
+   ```
 
 2. **Cria um ambiente virtual e ativa-o:**
 ```bash
@@ -55,8 +54,6 @@ flask run
 
 ```
 
-
-
 ## 📂 Estrutura de Blueprints
 
 O projeto utiliza uma arquitetura escalável baseada em Blueprints:
@@ -78,3 +75,4 @@ Tens uma ideia para melhorar o LinkHub?
 ---
 
 ⭐ Desenvolvido com fé de que este repositório vai bombar!
+
